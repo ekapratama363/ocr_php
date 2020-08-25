@@ -1,0 +1,8 @@
+{
+    "require": {
+        "thiagoalessio/tesseract_ocr": "^2.9",
+        "spatie/pdf-to-image": "^2.0",
+        "org_heigl/ghostscript": "^2.3",
+        "ottosmops/pdftotext": "^2.0"
+    }
+}
