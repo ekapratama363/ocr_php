@@ -5,6 +5,13 @@ require './vendor/autoload.php';
 use thiagoalessio\TesseractOCR\TesseractOCR;
 use Org_Heigl\Ghostscript\Ghostscript;
 
+// $path = dirname(__FILE__) . '/files/cv-eka-pratama.pdf';
+// $image = new Imagick();
+// Ghostscript::setGsPath('C:\Program Files\gs\gs9.52\bin\gswin64c.exe');
+// $image->pingImage('myPdfFile.pdf');
+// echo $image->getNumberImages();
+
+// die();
 if(isset($_FILES['file'])){
     $file_name = $_FILES['file']['name'];
     $file_tmp =$_FILES['file']['tmp_name'];
@@ -35,10 +42,15 @@ if(isset($_FILES['file'])){
     if (true === $gs->render()) {
         for($x = 1; $x <= 10; $x++) {
             if(file_exists('files/'.$file_name_without_ext .'-'.$x.'.jpeg')) {
-                echo '<pre>';
-                echo (new TesseractOCR('files/'.$file_name_without_ext .'-'.$x.'.jpeg'))->run();
+                $result[] = (new TesseractOCR('files/'.$file_name_without_ext .'-'.$x.'.jpeg'))->run();
             }
         }
+        
+        // if(file_exists('files/'.$file_name)) {
+        //     $result[] = (new TesseractOCR('files/'.$file_name))->run();
+        // }
+
+        echo json_encode($result);
     } else {
         echo 'some error occured';
     }
